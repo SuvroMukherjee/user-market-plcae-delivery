@@ -1,0 +1,21 @@
+.welcome_model_close_btn {
+  background-color: #9af064;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.welcome_message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.welcome_message_content {
+  text-align: center;
+}

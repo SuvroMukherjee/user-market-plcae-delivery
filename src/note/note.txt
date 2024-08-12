@@ -1,0 +1,110 @@
+<div
+                    className="item-card-col"
+                    onMouseEnter={() => handleMouseEnter(ele?._id)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {/* best seller badge  */}
+                    {ele?.is_bestSell && (
+                      <div className="best-seller-badge">Best Seller</div>
+                    )}
+                    <div className="card item-card">
+                      <div className="card-img-top">
+                        <img src={ele?.specId?.image[0]?.image_path} alt="" />
+                        {/* {ele?.productId?.brandId?.brand_origin &&
+                                            <img src={madeinindia} alt='madeinindia' className='MInForlist' />} */}
+
+                        {/** for UI */}
+                        {hoveredItem === ele?._id && (
+                          <div
+                            className="wishlistBtn"
+                            onClick={() => SavetoWishList(ele)}
+                          >
+                            {isAlreadywishedFunc(ele?._id) ? (
+                              <div className="wrapper added disablebackground">
+                                <FaHeart size={20} />
+                                Added To Wishlist
+                              </div>
+                            ) : (
+                              <div className="wrapper">
+                                <CiHeart size={24} />
+                                Add to Wishlist
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      <div
+                        className="card-body cursor"
+                        onClick={() => redirectTodetailsPage(ele?._id)}
+                      >
+                        <div className="card-title">
+                          {/* {ele?.productId?.brandId?.title}{" "} */}
+                          {ele?.productId?.name}{" "}
+                          {ele?.specId?.spec_det?.length > 0 && (
+                            <span>
+                              (
+                              {ele?.specId?.spec_det
+                                ?.slice(0, 3)
+                                ?.map((ele, index, array) => (
+                                  <span key={index}>
+                                    {ele.value}
+                                    {index < array.length - 1 ? ", " : ""}
+                                  </span>
+                                ))}
+                              )
+                            </span>
+                          )}
+                        </div>
+                        {/* <div className="card-text">
+                          {ele?.productId?.categoryId?.title}
+                        </div> */}
+                        <ul className="cart-view-key">
+                          {ele?.productId?.features?.length > 0 &&
+                            ele?.productId?.features?.map((ele, index) =>
+                              ele ? <li key={index}>{ele}.</li> : null
+                            )}
+                        </ul>
+                        <div className="card-text-bottom">
+                          <label className="price">
+                            ₹{ele?.price?.toLocaleString()}{" "}
+                            <span>{ele?.specId?.price?.toLocaleString()}</span>{" "}
+                            <span className="off-price">
+                              {" "}
+                              {Math.round(
+                                calculateDiscountPercentage(
+                                  ele?.specId?.price,
+                                  ele?.price
+                                )
+                              )}
+                              % Off
+                            </span>
+                          </label>
+                        </div>
+                        <div className="rate-review">
+                          {/* <div className="rating-stars">
+                                                <FontAwesomeIcon icon={regularStar} className="StatIcon" />
+                                                <FontAwesomeIcon icon={regularStar} className="StatIcon" />
+                                                <FontAwesomeIcon icon={regularStar} className="StatIcon" />
+                                                <FontAwesomeIcon icon={regularStar} className="StatIcon" />
+                                                <FontAwesomeIcon icon={regularStar} className="StatIcon" />
+                                            </div> */}
+                          <StarRating
+                            value={ratingCalculation(ele?._id, reviewData)}
+                          />
+                          {/* <div>
+                                                {ratingCalculation(ele?._id, reviewData)}
+                                            </div> */}
+                          <span>
+                            Total {totalReview(ele?._id, reviewData)} Reviews
+                          </span>
+                        </div>
+
+                        {/* <div className="card-text-bottom2">
+                                            <label className="price" onClick={() => addTocart(ele)}>
+                                                add to cart
+                                            </label>
+                                        </div> */}
+                      </div>
+                    </div>
+                    <div>{/* {console.log("hi " + productData)} */}</div>
+                  </div>

@@ -1,0 +1,39 @@
+ function rgbToHex(rgbArray) {
+    return `#${rgbArray.map((x) => x.toString(16).padStart(2, "0")).join("")}`;
+  }
+
+  async function getDominantColor(imageUrl) {
+    try {
+      console.log(`Loading image: ${imageUrl}`);
+      const img = await loadImage(imageUrl);
+      const canvas = createCanvas(img.width, img.height);
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+
+      const imageData = ctx.getImageData(0, 0, img.width, img.height).data;
+      const rgb = [0, 0, 0];
+      const pixelCount = img.width * img.height;
+      for (let i = 0; i < pixelCount; i++) {
+        rgb[0] += imageData[i * 4];
+        rgb[1] += imageData[i * 4 + 1];
+        rgb[2] += imageData[i * 4 + 2];
+      }
+      rgb[0] = Math.round(rgb[0] / pixelCount);
+      rgb[1] = Math.round(rgb[1] / pixelCount);
+      rgb[2] = Math.round(rgb[2] / pixelCount);
+
+      const hex = rgbToHex(rgb);
+      const colorName = ntc.name(hex)[1];
+      return { hex, colorName };
+    } catch (err) {
+      console.error(`Error loading image: ${imageUrl}`, err);
+      throw new Error(
+        `Failed to load image: ${imageUrl}, error: ${err.message}`
+      );
+    }
+  }
+
+  async function getDominantColors(imageUrls) {
+    const colorPromises = imageUrls.map((url) => getDominantColor(url));
+    return Promise.all(colorPromises);
+  }

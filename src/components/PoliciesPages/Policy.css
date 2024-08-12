@@ -1,0 +1,95 @@
+/* Base styles */
+.policyPage {
+  background: whitesmoke;
+  padding: 20px; /* Added padding for better spacing on all devices */
+  width: 100%;
+}
+
+.policyPage h1 {
+  font-family: "Inter", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px; /* Adjusted line-height for better readability */
+  text-align: center;
+  margin-bottom: 5%;
+  text-decoration: underline;
+}
+
+.policyPage h2 {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px; /* Adjusted line-height for better readability */
+}
+
+.policyPage p {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.policyPage ul li {
+  font-size: 14px;
+  list-style: disc;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .policyPage {
+    padding: 15px;
+  }
+
+  .policyPage h1 {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 4%;
+  }
+
+  .policyPage h2 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .policyPage p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .policyPage ul li {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .policyPage {
+    padding: 10px;
+  }
+
+  .policyPage h1 {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 3%;
+  }
+
+  .policyPage h2 {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .policyPage p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .policyPage ul li {
+    font-size: 10px;
+  }
+}
+
+/* .policyPageTbale tbody, tr, td, tfoot, th, thead, tr {
+  border-style: dotted !important;
+  border-color: darkgray !important;
+  border-width: 2px !important;
+  padding: 10px;
+} */
+

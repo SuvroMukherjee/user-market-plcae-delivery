@@ -494,54 +494,54 @@ export async function getLocationByZipCoder(pincode) {
   }
 }
 
-export async function getHomeAPI(pin) {
-  if (pin === "undefined" || pin === null) {
-
-    try {
-      const response = await axios.get(apiUrl + "/home/get");
-      // console.log("Response without pin:", response);
-      return response;
-    } catch (error) {
-      console.error("Error without pin:", error);
-      return error;
-    }
-  } else {
-    console.log("Fetching with pin:", pin);
-    let payload = {
-      zipCode: pin,
-    };
-    // try {
-    //     const response = await axios.get(apiUrl + `/home/get`, {
-    //         params: payload,
-    //         headers: setAuthHeader()
-    //     });
-    //     console.log('Response with pin:', response);
-    //     return response;
-    // } catch (error) {
-    //     console.error('Error with pin:', error);
-    //     return error;
-    // }
-    try {
-      const response = await axios.get(apiUrl + "/home/get");
-      // console.log("Response without pin:", response);
-      return response;
-    } catch (error) {
-      console.error("Error without pin:", error);
-      return error;
-    }
-  }
-}
-
 // export async function getHomeAPI(pin) {
+//   if (pin === "undefined" || pin === null) {
+
 //     try {
-//       const response = await axios.get(apiUrl + "/home/all-get");
+//       const response = await axios.get(apiUrl + "/home/get");
 //       // console.log("Response without pin:", response);
 //       return response;
 //     } catch (error) {
 //       console.error("Error without pin:", error);
 //       return error;
 //     }
+//   } else {
+//     console.log("Fetching with pin:", pin);
+//     let payload = {
+//       zipCode: pin,
+//     };
+//     // try {
+//     //     const response = await axios.get(apiUrl + `/home/get`, {
+//     //         params: payload,
+//     //         headers: setAuthHeader()
+//     //     });
+//     //     console.log('Response with pin:', response);
+//     //     return response;
+//     // } catch (error) {
+//     //     console.error('Error with pin:', error);
+//     //     return error;
+//     // }
+//     try {
+//       const response = await axios.get(apiUrl + "/home/get");
+//       // console.log("Response without pin:", response);
+//       return response;
+//     } catch (error) {
+//       console.error("Error without pin:", error);
+//       return error;
+//     }
+//   }
 // }
+
+export async function getHomeAPI(pin) {
+    try {
+      const response = await axios.get(apiUrl + "/home/all-get");
+      // console.log("Response without pin:", response);
+      return response;
+    } catch (error) {
+      console.error("Error without pin:", error);
+      return error;
+    }
+}
 
 export const PlaceOrder = async (fromdata) => {
   try {

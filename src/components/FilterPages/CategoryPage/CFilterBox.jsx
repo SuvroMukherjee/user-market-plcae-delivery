@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MultiRangeSlider from "multi-range-slider-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   colorsWithHex,
   discountArray,
@@ -29,8 +29,13 @@ const CFilterBox = ({
   handleColorChange,
 }) => {
   const { productData: allProducts, isLoading: productLoading } = useSelector(
-    (state) => state?.products?.data|| []
-  );
+    (state) => state?.products?.data|| [])
+
+
+    const [searchParams] = useSearchParams();
+  const categoryId = searchParams.get("category");
+
+  
 
   // const allCategories = useSelector(
   //   (state) => state?.products?.data?.categoryData
@@ -40,6 +45,11 @@ const {
   data, // Set default to an empty object
   isLoading: categoryLoading,
 } = useSelector((state) => state?.category || {});
+
+
+  const { data : allBrands, isLoading } = useSelector((state) => state?.brands || []);
+
+  let sortedBrands = allBrands?.brandWithCounts || [];
 
 // Check if categoryWithCounts exists and has length > 0
 let sortedCategories = [];
@@ -156,14 +166,20 @@ if (data?.categoryWithCounts?.length > 0) {
                   ? sortedCategories.map((ele, index) => (
                       <li
                         key={ele._id}
-                        className={catId === ele._id ? "selectedLi" : ""}
+                        className={categoryId === ele._id ? "selectedLi" : ""}
                         onClick={() =>
                           navigate(`/category?category=${ele._id}`)
                         }
                       >
                         <a>
                           {ele.name}{" "}
-                          <span style={{ fontSize: "10px" }}>
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              color:
+                                categoryId === ele._id ? "black" : undefined, // Conditionally set the color
+                            }}
+                          >
                             ({ele?.sellerProductCount})
                           </span>
                         </a>
@@ -180,7 +196,7 @@ if (data?.categoryWithCounts?.length > 0) {
         </div>
       </div>
       {/* Brand Accordion */}
-      {filterBrandArray.length > 0 && (
+      {sortedBrands?.length > 0 && (
         <div className="accordion mt-2" id="accordionExample1">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingTwo">
@@ -204,7 +220,7 @@ if (data?.categoryWithCounts?.length > 0) {
             >
               <div className="accordion-body">
                 <ul>
-                  {filterBrandArray.map((ele) => (
+                  {sortedBrands?.map((ele) => (
                     <li
                       key={ele._id}
                       className={
@@ -218,20 +234,10 @@ if (data?.categoryWithCounts?.length > 0) {
                           onChange={() => handleBrandChange(ele._id)}
                         />
                         <a>
-                          {ele.title}
+                          {ele?.name}
                           <span style={{ fontSize: "12px" }}>
                             (
-                            {catId === "all"
-                              ? allProducts?.filter(
-                                  (item) =>
-                                    item?.productId?.brandId?._id === ele?._id
-                                )?.length
-                              : allProducts?.filter((item) => {
-                                  return (
-                                    item?.productId?.brandId?._id == ele?._id &&
-                                    item?.productId?.categoryId?._id == catId
-                                  );
-                                })?.length}
+                            {ele?.sellerProductCount}
                             )
                           </span>
                         </a>

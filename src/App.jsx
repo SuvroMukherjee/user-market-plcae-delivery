@@ -44,8 +44,8 @@ import { fetchProducts } from "./store/productsSlice";
 import { fetchWishLists } from "./store/wishlistSlice";
 import "./style.css";
 import "./responsive.css";
-import SearchPageFilter from "./components/FilterPages/SearchPage/SearchPageFilter";
-import CategoryFilterNew from "./components/FilterPages/CategoryPage/CategoryFilterNew";
+// import SearchPageFilter from "./components/FilterPages/SearchPage/SearchPageFilter";
+// import CategoryFilterNew from "./components/FilterPages/CategoryPage/CategoryFilterNew";
 import { fetchBrands } from "./store/brandSlice";
 import { fetchCategory } from "./store/categorySlice";
 
@@ -71,11 +71,10 @@ const App = () => {
     window.history.scrollRestoration = "manual";
   }, []);
 
-  
   useEffect(() => {
-     dispatch(fetchCategory());
-      dispatch(fetchBrands());
-  }, []);
+    dispatch(fetchCategory());
+    dispatch(fetchBrands());
+  }, [dispatch]);
 
   return (
     <>
@@ -135,11 +134,10 @@ const App = () => {
               }
             />
             <Route
-              path="/category"
+              path="/category/:id?"
               element={
                 <div className="inner-pages-wrapper">
-                  {/* <CategoryFilterPage /> */}
-                  <CategoryFilterNew />
+                  <CategoryFilterPage />
                 </div>
               }
             />
@@ -164,7 +162,6 @@ const App = () => {
               path="/product-details/:id"
               element={
                 <div className="inner-pages-wrapper">
-                 
                   <DetailsProductPage />
                 </div>
               }

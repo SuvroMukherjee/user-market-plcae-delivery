@@ -54,7 +54,7 @@ export const Header = () => {
   const tempCartItemsData = useSelector(tempCartItems);
 
   const data = useSelector((state) => state?.products?.data || []);
-  const { categoryData = [] } = data;
+  // const { categoryData = [] } = data;
 
   const UserAddress = useSelector(userInformation);
 
@@ -75,51 +75,18 @@ export const Header = () => {
     }
   };
 
-  const reversedCategories = [...categoryData]?.reverse();
+  // const reversedCategories = [...categoryData]?.reverse();
 
-  // const popover = (
-  //   <Popover id="popover-basic">
-  //     <Popover.Body>
-  //       <ListGroup>
-  //         <ListGroupItem>
-  //           <strong>Name:</strong> {userdata?.name}
-  //         </ListGroupItem>
-  //         <ListGroupItem>
-  //           <strong>Phone No:</strong> {userdata?.phone_no}
-  //         </ListGroupItem>
-  //         <ListGroupItem>
-  //           <strong>Email:</strong> {userdata?.email}
-  //         </ListGroupItem>
-  //         <ListGroupItem
-  //           onClick={() => navigate("/user/manageaddress")}
-  //           className="text-center cursor"
-  //         >
-  //           <strong>
-  //             <span>
-  //               <FaUserCircle size={25} />
-  //             </span>{" "}
-  //             Manage Account
-  //           </strong>
-  //         </ListGroupItem>
-  //         <ListGroupItem
-  //           onClick={() => navigate("/user/orderlist")}
-  //           className="text-center cursor"
-  //         >
-  //           <span>
-  //             <GoPackageDependents size={25} />
-  //           </span>{" "}
-  //           <strong>
-  //             <span></span> Orders
-  //           </strong>
-  //         </ListGroupItem>
-  //         <ListGroupItem onClick={() => handleLogout()}>
-  //           <div className="logout">LOGOUT</div>
-  //         </ListGroupItem>
-  //       </ListGroup>
-  //     </Popover.Body>
-  //   </Popover>
-  // );
 
+  const { data: allCategories, isLoading } = useSelector(
+    (state) => state?.category || []
+  );
+
+  let categoryData = allCategories?.categories || [];
+
+   const reversedCategories = [...categoryData]?.reverse();
+
+  
   const handleWishRedirect = () => {
     if (allWishlists) {
       navigate("/wishlists");
@@ -287,30 +254,18 @@ export const Header = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  console.log({ categoryData });
+
   return (
     <>
       <header className="inner-header">
-        {/* <div className="discount-bar">
-          30% discount on all products special for November!
-        </div> */}
         <nav className="navbar navbar-expand-xl">
           <div className="container-fluid row-1">
             <Link to={"/"} className="navbar-brand">
-              {/* Appliance */}
               <img src={zoofiLogo} alt="logo" width={150} />
             </Link>
-            {/* <Speech /> */}
             <div className="search-form">
-              {/* <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Large</span>
-                </div>
-                <input type="text" class="form-control" placeholder="Search for Products, Brands & more" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-              </div>
-              <button className="btn" type="submit">
-                Go
-              </button> */}
-              {/* <img src={search} alt="Search" /> */}
               <select
                 className="filter-dropdown categoryFilterIcon"
                 value={searchcategory}
@@ -748,8 +703,8 @@ export const Header = () => {
                     Best Seller
                   </a>
                 </li> */}
-                {reversedCategories?.length > 0 &&
-                  reversedCategories
+                {categoryData?.length > 0 &&
+                  categoryData
                     // ?.filter((ele) => ele?.topCat === true)
                     // .sort(
                     //   (a, b) => new Date(a?.updatedAt) - new Date(b?.updatedAt)

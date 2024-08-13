@@ -64,6 +64,8 @@ const App = () => {
       dispatch(fetchBanners(pincode));
       dispatch(fetchCustomerData());
       dispatch(fetchAddress());
+       dispatch(fetchCategory());
+       dispatch(fetchBrands());
     }, 0);
   }, [isLoggIn, dispatch]);
 
@@ -71,10 +73,10 @@ const App = () => {
     window.history.scrollRestoration = "manual";
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchCategory());
-    dispatch(fetchBrands());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCategory());
+  //   dispatch(fetchBrands());
+  // }, [dispatch]);
 
   return (
     <>

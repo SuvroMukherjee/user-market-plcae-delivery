@@ -29,21 +29,26 @@ const CFilterBox = ({
   handleColorChange,
 }) => {
   const { productData: allProducts, isLoading: productLoading } = useSelector(
-    (state) => state?.products?.data || []
+    (state) => state?.products?.data|| []
   );
 
   // const allCategories = useSelector(
   //   (state) => state?.products?.data?.categoryData
   // );
 
-    const { data: allCategories, isLoading: categoryLoading } = useSelector(
-      (state) => state?.category || []
-    );
+const {
+  data, // Set default to an empty object
+  isLoading: categoryLoading,
+} = useSelector((state) => state?.category || {});
 
-
-  let sortedCategories =
-    allCategories &&
-    [...allCategories].sort((a, b) => a.title.localeCompare(b.title));
+// Check if categoryWithCounts exists and has length > 0
+let sortedCategories = [];
+if (data?.categoryWithCounts?.length > 0) {
+  // Create a shallow copy of the array before sorting
+  sortedCategories = [...data.categoryWithCounts].sort((a, b) =>
+    a?.name?.localeCompare(b?.name)
+  );
+}
 
   const [filterBrandArray, setFilterBrandArray] = useState([]);
   const [additionalFilters, setAdditionalFilters] = useState({});
@@ -103,7 +108,7 @@ const CFilterBox = ({
         if (!result[titleLowerTrimmed]) {
           result[titleLowerTrimmed] = [];
         }
-        if (!result[titleLowerTrimmed].includes(valueLowerTrimmed)) {
+        if (!result[titleLowerTrimmed]?.includes(valueLowerTrimmed)) {
           result[titleLowerTrimmed].push(valueLowerTrimmed);
         }
       });
@@ -113,6 +118,8 @@ const CFilterBox = ({
   };
 
   const navigate = useNavigate();
+
+  
 
   return (
     <div className="left-filter-column" id="filterColumn">
@@ -153,12 +160,11 @@ const CFilterBox = ({
                         onClick={() => navigate(`/category/${ele._id}`)}
                       >
                         <a>
-                          {ele.title}{" "}
+                          {ele.name}{" "}
                           <span style={{ fontSize: "10px" }}>
                             ({ele?.sellerProductCount})
                           </span>
                         </a>
-                     
                       </li>
                     ))
                   : Array.from({ length: 5 }).map((_, index) => (
@@ -172,7 +178,7 @@ const CFilterBox = ({
         </div>
       </div>
       {/* Brand Accordion */}
-      {/* {filterBrandArray.length > 0 && (
+      {filterBrandArray.length > 0 && (
         <div className="accordion mt-2" id="accordionExample1">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingTwo">
@@ -235,7 +241,7 @@ const CFilterBox = ({
             </div>
           </div>
         </div>
-      )} */}
+      )}
       {/* Customer Rating */}
       <div className="filter-option">
         <div className="header">
@@ -253,7 +259,7 @@ const CFilterBox = ({
                 id={`inlineCheckbox${rating}`}
                 value={rating}
                 onChange={() => handleCheckboxChange(rating)}
-                checked={checkedValues.includes(rating)}
+                checked={checkedValues?.includes(rating)}
               />
               <label
                 className="form-check-label"
@@ -287,9 +293,9 @@ const CFilterBox = ({
           />
         </div>
         <div className="price-value">
-          <span>₹ {minValue.toLocaleString()}</span>
+          <span>₹ {minValue?.toLocaleString()}</span>
           <span>-</span>
-          <span>₹ {maxValue.toLocaleString()}</span>
+          <span>₹ {maxValue?.toLocaleString()}</span>
         </div>
       </div>
 

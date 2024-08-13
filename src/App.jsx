@@ -46,6 +46,8 @@ import "./style.css";
 import "./responsive.css";
 import SearchPageFilter from "./components/FilterPages/SearchPage/SearchPageFilter";
 import CategoryFilterNew from "./components/FilterPages/CategoryPage/CategoryFilterNew";
+import { fetchBrands } from "./store/brandSlice";
+import { fetchCategory } from "./store/categorySlice";
 
 const App = () => {
   const isLoggIn = useSelector((state) => state.auth.isLoggIn);
@@ -67,6 +69,12 @@ const App = () => {
 
   useEffect(() => {
     window.history.scrollRestoration = "manual";
+  }, []);
+
+  
+  useEffect(() => {
+     dispatch(fetchCategory());
+      dispatch(fetchBrands());
   }, []);
 
   return (

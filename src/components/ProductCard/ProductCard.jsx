@@ -374,8 +374,8 @@ export const ProductCardSkeleton = ({ type, showingNo }) => {
               className="card-img-top"
             >
               <Skeleton
-                height={170}
-                width={300}
+                height={150}
+                width={250}
                 style={{ borderRadius: "10px" }}
               />
             </div>

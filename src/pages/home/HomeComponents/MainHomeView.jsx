@@ -21,9 +21,11 @@ export const MainHomeView = () => {
   const [isListening, setIsListening] = useState(false);
 
 
-  const { data: allCategories, isLoading } = useSelector(
+  const { data, isLoading } = useSelector(
     (state) => state?.category || []
   );
+
+  let allCategories = data?.categories || [];
 
   useEffect(() => {
     dispatch(fetchCategory());

@@ -225,7 +225,10 @@ export const CategoryFilterPage = () => {
               />
             </div>
             <div className="col-xl-9 col-12 right-col">
-              <RenderProducts filterProductsArray={filterProductsArray} />
+              <RenderProducts
+                filterProductsArray={filterProductsArray}
+                productLoading={productLoading}
+              />
             </div>
           </div>
         </div>

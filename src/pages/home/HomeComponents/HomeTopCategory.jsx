@@ -10,7 +10,7 @@ const HomeTopCategory = () => {
         <div className="container-fluid container-padding">
           <div className="section-heading">
             <h2>Top Categories</h2>
-            <a onClick={() => navigate(`/category/all`)} className="cta-view">
+            <a onClick={() => navigate(`/category`)} className="cta-view">
               View All Categories
             </a>
           </div>

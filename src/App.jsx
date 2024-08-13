@@ -135,7 +135,7 @@ const App = () => {
               }
             />
             <Route
-              path="/category/:id?"
+              path="/category"
               element={
                 <div className="inner-pages-wrapper">
                   {/* <CategoryFilterPage /> */}

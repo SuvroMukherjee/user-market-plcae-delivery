@@ -11,9 +11,11 @@ export const HomeBrands = () => {
 
   const dispatch = useDispatch();
 
-  const { data: allBrands, isLoading } = useSelector(
+  const { data, isLoading } = useSelector(
     (state) => state?.brands || []
   );
+
+  let allBrands = data?.brands || [];
 
   useEffect(() => {
     dispatch(fetchBrands());

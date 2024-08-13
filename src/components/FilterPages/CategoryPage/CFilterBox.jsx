@@ -157,7 +157,9 @@ if (data?.categoryWithCounts?.length > 0) {
                       <li
                         key={ele._id}
                         className={catId === ele._id ? "selectedLi" : ""}
-                        onClick={() => navigate(`/category/${ele._id}`)}
+                        onClick={() =>
+                          navigate(`/category?category=${ele._id}`)
+                        }
                       >
                         <a>
                           {ele.name}{" "}
